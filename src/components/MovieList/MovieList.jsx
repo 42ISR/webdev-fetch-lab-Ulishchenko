@@ -1,19 +1,16 @@
-import MovieCard from '../MovieCard/MovieCard';
-import './MovieList.css';
+import MovieCard from '../MovieCard/MovieCard'
+import './MovieList.css'
 
-function MovieList() {
+const MovieList = ({ filmy }) => {
   return (
     <ul className="movie-list">
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
+      {filmy.map((film) => (
+        <li key={film.imdbID}>
+          <MovieCard movie={film} />
+        </li>
+      ))}
     </ul>
-  );
+  )
 }
 
-export default MovieList;
+export default MovieList
