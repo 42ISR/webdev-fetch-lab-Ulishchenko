@@ -1,28 +1,35 @@
-import LikeButton from '../LikeButton/LikeButton';
-import './MovieCard.css';
+import { Link } from 'react-router-dom'
+import LikeButton from '../LikeButton/LikeButton'
+import './MovieCard.css'
 
-function MovieCard() {
+const MovieCard = ({ movie }) => {
+  const { Title, Year, Poster, Type, imdbID } = movie
+
   return (
     <article className="movie-card">
-      <button type="button" className="movie-card__poster-button" aria-label="Открыть страницу фильма «Joker»">
-        <img
-          className="movie-card__poster"
-          src="https://m.media-amazon.com/images/M/MV5BNzY3OWQ5NDktNWQ2OC00ZjdlLThkMmItMDhhNDk3NTFiZGU4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
-          alt="Joker"
-        />
-        <span className="movie-card__type">Фильм</span>
-      </button>
+      <Link
+        to={`/movie/${imdbID}`}
+        className="movie-card__poster-button"
+        aria-label={`Открыть страницу фильма «${Title}»`}
+      >
+        {Poster !== 'N/A' ? (
+          <img className="movie-card__poster" src={Poster} alt={Title} />
+        ) : (
+          <div className="movie-card__poster">Постер отсутствует</div>
+        )}
+      <span className="movie-card__type">{Type}</span>
+      </Link>
 
       <div className="movie-card__like">
         <LikeButton />
       </div>
 
       <div className="movie-card__info">
-        <h3 className="movie-card__title" title="Joker">Joker</h3>
-        <p className="movie-card__year">2019</p>
+        <h3 className="movie-card__title" title={Title}>{Title}</h3>
+        <p className="movie-card__year">{Year}</p>
       </div>
     </article>
-  );
+  )
 }
 
-export default MovieCard;
+export default MovieCard
